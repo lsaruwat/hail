@@ -3,6 +3,10 @@ class Utilities{
 	static kelvinToFahren(temp){
 		return Math.floor(temp*(9.0/5.0)-459.67);
 	}
+
+	static kelvinToCels(temp){
+		return Math.floor(temp-273.15)
+	}
 }
 
 
@@ -31,8 +35,10 @@ class Weather{
 		.then(function(respObj){
 			let textArea = document.getElementById("text-area");
 			textArea.innerHTML += "<h1>Weather in  " + respObj.name + "</h1>";
-			textArea.innerHTML += "<h2>Conditions " + respObj.weather[0].description + "</h2>";
-			textArea.innerHTML += "<h2>Temp: " + Utilities.kelvinToFahren(respObj.main.temp) + "</h2>";
+			textArea.innerHTML += "<h2>Conditions: " + respObj.weather[0].description + "</h2>";
+			textArea.innerHTML += "<h2>Temp: " + Utilities.kelvinToFahren(respObj.main.temp) + "F " + Utilities.kelvinToCels(respObj.main.temp) + "C</h2>";
+			if(respObj.weather[0].description === "hail")textArea.innerHTML+="<h1>It's gonna HAIL!!!!!!!!!!!</h1>";
+			else textArea.innerHTML+="<h1>It's all good strawdog!</h1>";
 		});
 	}
 
