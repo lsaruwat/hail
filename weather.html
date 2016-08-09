@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+<body>
+<div id="text-area"></div>
+
+<script type="text/javascript" src="weather.js"></script>
+
+<script type="text/javascript">
+	let w = new Weather("a5e1dddae143c16fc37353d622ddde4d");
+	w.getHailByCoord(-104.8824123,39.57884634);
+	let textArea = document.getElementById("text-area");
+	textArea.innerHTML += "This was called after the fetch</br>";
+
+</script>
+</body>
+</html>
