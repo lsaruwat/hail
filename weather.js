@@ -7,6 +7,15 @@ class Utilities{
 	static kelvinToCels(temp){
 		return Math.floor(temp-273.15)
 	}
+
+	static domUpdater(respObj){
+		let textArea = document.getElementById("text-area");
+		textArea.innerHTML += "<h1>Weather in  " + respObj.name + "</h1>";
+		textArea.innerHTML += "<h2>Conditions: " + respObj.weather[0].description + "</h2>";
+		textArea.innerHTML += "<h2>Temp: " + Utilities.kelvinToFahren(respObj.main.temp) + "F " + Utilities.kelvinToCels(respObj.main.temp) + "C</h2>";
+		if(respObj.weather[0].description === "hail")textArea.innerHTML+="<h1>Hail: It's gonna HAIL!!!!!!!!!!!</h1>";
+		else textArea.innerHTML+="<h1>Hail: Looks like no!</h1>";
+	}
 }
 
 
@@ -33,12 +42,7 @@ class Weather{
 		return response.json();
 		})
 		.then(function(respObj){
-			let textArea = document.getElementById("text-area");
-			textArea.innerHTML += "<h1>Weather in  " + respObj.name + "</h1>";
-			textArea.innerHTML += "<h2>Conditions: " + respObj.weather[0].description + "</h2>";
-			textArea.innerHTML += "<h2>Temp: " + Utilities.kelvinToFahren(respObj.main.temp) + "F " + Utilities.kelvinToCels(respObj.main.temp) + "C</h2>";
-			if(respObj.weather[0].description === "hail")textArea.innerHTML+="<h1>It's gonna HAIL!!!!!!!!!!!</h1>";
-			else textArea.innerHTML+="<h1>It's all good strawdog!</h1>";
+			Utilities.domUpdater(respObj);
 		});
 	}
 
