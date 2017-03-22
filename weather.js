@@ -44,13 +44,16 @@ class Weather{
 		return str;
 	}
 
-	apiCall(url, thisAlias=this){
-		fetch(url).then(function(response){
-		return response.json();
-		})
-		.then(function(respObj){
-			thisAlias.domUpdater(respObj);
-		});
+	apiCall (url) {
+		fetch(url).then(
+	    	(response) => response.json()
+	  	).then(
+	    	(respObj) => {
+	    		this.domUpdater(respObj);
+	    	}
+	  	).catch(
+	    	(err) => console.error(err.message, err)
+	  	)
 	}
 
 	getHailByCoord(lon,lat){
@@ -95,6 +98,7 @@ class WeatherUnderground extends Weather{
 		let response = respObj.current_observation;
 		console.log(response);
 		let textArea = document.getElementById("text-area");
+		textArea.innerHTML = "";
 		textArea.innerHTML += "<h1>Weather in  " + response.display_location.city + "</h1>";
 		textArea.innerHTML += "<h2>Conditions: " + response.weather + "</h2>";
 		textArea.innerHTML += "<h2>Temp: " + response.temp_f + "F " + response.temp_c + "C</h2>";
